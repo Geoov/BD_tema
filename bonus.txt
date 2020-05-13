@@ -1,0 +1,252 @@
+
+                  <!-- <input id="mytext" class="form-control" type="text" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="My popover content." /> -->
+                  
+                    <!-- <button type="button" class="close py-2 mt-0" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button> -->
+                    
+<!-- <?php if(("{$_SESSION['isMAC']}")==1)
+                      echo "<div class=\"text-center mt-2 mb-0 py-2 px-0 alert alert-warning alert-dismissible\" role=\"alert\" style=\"display:show;\">";
+                        echo "This <strong>MAC</strong> already exists.";
+                      echo "</div>";
+                      
+                    ?>          -->   
+ ?>
+                                <!-- echo  "<td class=\"float-left px-0\" style=\"color:#edf0f2!important;\"><a class=\"btn btn-sm btn-danger text-center\" href='deleteUserDevice.php?id=$val'>Delete</a></td>"; -->
+                            <?php
+                        }
+                        echo "</tr>";
+                        
+ <!-- echo"<td><button id=\"pop\" type=\"button\" class=\"btn btn-lg btn-primary\" data-toggle=\"popover\" title=\"Details\" data-content=\"da\" data-placement=\"right\" data-html=\"true\" >" . $SSID . "</button></td>"; -->
+
+<!--  
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:EE:C9:34:E3:7E', '123.42.50.52', 'Printer', 'Linux', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('15:F2:C9:33:E7:7E', '145.42.36.52', 'Smartphone', 'Android', 1);
+
+
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:F2:C9:33:E3:7E', '101.42.69.52', 'Computer', 'Windows', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:EE:C9:34:FF:7E', '123.42.53.52', 'Printer', 'Linux', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:F2:C9:23:E3:7C', '101.42.28.52', 'Computer', 'Windows', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:EE:C9:14:E3:7E', '123.62.50.52', 'Printer', 'Linux', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:F2:C9:53:E3:7E', '101.12.58.52', 'Computer', 'Windows', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:EE:C9:64:E3:11', '123.42.50.59', 'Printer', 'Linux', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:F2:C9:33:E3:12', '101.42.58.69', 'Computer', 'Windows', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('88:EE:C9:14:E3:7C', '123.42.10.39', 'Printer', 'Linux', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('78:F2:C9:32:E3:7E', '221.42.58.52', 'Computer', 'Windows', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('23:1E:C9:56:E3:7E', '123.42.48.52', 'Printer', 'Linux', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:F2:C9:99:E3:7E', '101.42.49.52', 'Computer', 'Windows', 1);
+
+INSERT INTO rc.devices(MAC, IP, device_type, OS, user) VALUES ('11:EE:C9:33:E3:7E', '123.42.23.52', 'Printer', 'Linux', 1);
+-->
+
+
+  $('.getUserEditID').on('click', function (event) {
+
+        $.ajax({
+            type: "POST",
+            url: "/echo/json/",
+            data: {
+                json: JSON.stringify({
+                    MAC : "User1",
+                }),
+                delay: 0
+            },
+            success: function(data) {
+              $('input[name="MAC"]').val(data.MAC);
+              $('#editModal').modal('show');
+            }
+        });
+  });
+
+  $('#editWifiDetails').on('click', function (event) {
+      // var otherProp = $('.usereId').text();
+      $.ajax({
+          type: "POST",
+          url: "lookup.php",
+          data: $('form.editWifiDetails').serialize(),
+          success: function (msg) {
+              $("#lookupholder").html(msg)
+          },
+          error: function () {
+              $("#lookupholder").html("error")
+          }
+      });
+  });
+
+  <div class="row justify-content-center">
+
+                              <button data-useredit="1" type="button" class="btn btn-sm getUserEditID"><i class="col-md-8 px-2 mx-auto far fa-edit fa-3x"></i></button>
+                                
+                                <div class="modal fade" id="editModal1" tabindex="-1" role="dialog" aria-labelledby="wifi1EditModal" aria-hidden="true" style="display:none;">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="panel-primary">
+                                        <div class="panel-heading">
+                                          <h3 class="panel-title"><i class="fa fa-user"></i>
+                                            <span class="font-weight-bold"><?php echo $SSID?></span>
+                                          </h3>
+                                        </div>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form class="editWifiDetails">
+                                          <div class="input-group"><i class="fab fa-500px fa-2x"></i>
+                                            <input type="text" name="MAC" class="form-control" placeholder="<?php echo $BSSID; ?>" required>
+                                          </div>
+                                        </form>
+                                      </div>
+                                      <div style="padding: 10px 15px;background-color: #f5f5f5;border-top: 1px solid #dddddd;border-bottom-right-radius: 3px;border-bottom-left-radius: 3px;">
+                                        <button id="deleteUser" class="btn btn-primary">Edit</button>
+                                        <button class="btn btn-success" href="#" id="close" data-dismiss="modal">Close</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <script>
+
+$(document).ready(function(){
+  $(document).on('click', '.edit_data', function(){
+    var wifi_id = $(this).attr("id");
+    $.ajax({
+      url:"fetch.php",
+      method:"POST",
+      data:{wifi_id:wifi_id},
+      dataType:"json",
+      success:function(data){
+
+        $('#BSSID').val(data.BSSID);
+        $('#speed').val(data.speed);
+        $('#secType').val(data.secType);
+        $('#wifi_id').val(data.id);
+        $('#insert').val("Update");
+        $('EeditModal').modal('show');
+      }
+    });
+  });
+
+  $('#insert_form').on("submit", function(event){  
+           event.preventDefault();  
+           if($('#BSSID').val() == "")  
+           {  
+              alert("BSSID is required");  
+           }  
+           else if($('#speed').val() == '')  
+           {  
+              alert("Speed is required");  
+           }  
+           else if($('#secType').val() == '')  
+           {  
+              alert("A security type is required");  
+           }  
+           else
+           {
+              $.ajax({
+                url:"insert.php".
+                method: "POST",
+                data:$('#insert_form').serialize(),
+                beforeSend:function(){
+                  $('#insert').val("Inserting");
+                },
+                success:function(data){
+                  $('#insert_form')[0].reset();
+                  $('#editModal').modal('hide');
+                  $('#wifi_details').html(data);
+                }
+
+              });
+           }
+        });
+
+      $(document).on('click', '.view_data', function(){  
+           var wifi_id = $(this).attr("id");  
+           if(wifi != '')  
+           {  
+                $.ajax({  
+                     url:"select.php",  
+                     method:"POST",  
+                     data:{wifi_id:wifi_id},  
+                     success:function(data){  
+                          $('#wifi_details').html(data);  
+                          // $('#dataModal').modal('show');  
+                     }  
+                });  
+           }            
+      });  
+ });  
+
+</script>
+
+
+              <?php
+
+                $stmtRouter = $conn->prepare($sqlSelectServerDetails);
+
+                if($stmtRouter)
+                {
+                     
+                  $stmtRouter->execute();
+
+                  $stmtRouter->bind_result($IP, $MAC, $servType, $servOS);
+                  $stmtRouter->fetch();
+
+                  $stmtRouter->free_result();
+                  $stmtRouter->close();
+
+
+                }else{
+
+                  echo "Failed to execute statement...";
+                  printf("Error: %s.\n", htmlspecialchars($conn->error));
+                  $stmtRouter->close();
+                      //   // $conn->close();
+                }
+
+              ?>
+
+
+                  <div class="row">
+      <div class="col-md-4">
+        <div class="card mb-3" data-aos="flip-left">
+          <div class="card-body mt-4 mb-1 text-center"><i class="pb-3 custom-text-primary fab fa-hubspot fa-3x"></i>
+            <div class="h4 pb-3">Experience</div>
+            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit primis rutrum, nullam tempor malesuada laoreet tempus blandit pretium etc.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-3" data-aos="zoom-in-up">
+          <div class="card-body mt-4 mb-1 text-center"><i class="pb-3 custom-text-primary fab fa-hubspot fa-3x"></i>
+            <div class="h4 pb-3">Flexibility</div>
+            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit primis rutrum, nullam tempor malesuada laoreet tempus blandit pretium etc.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card mb-3" data-aos="flip-right">
+          <div class="card-body mt-4 mb-1 text-center"><i class="pb-3 custom-text-primary fab fa-hubspot fa-3x"></i>
+            <div class="h4 pb-3">Results</div>
+            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit primis rutrum, nullam tempor malesuada laoreet tempus blandit pretium etc.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    https://laracasts.com/images/series/2018/testing-default.svg?v=10
